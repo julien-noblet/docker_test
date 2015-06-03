@@ -1,6 +1,8 @@
 #!/bin/bash
 
+echo "local   all             postgres                                   trust" >> /etc/postgresql/9.3/main/pg_hba.conf
 /etc/init.d/postgresql restart
+
 sudo -u postgres createuser osm
 sudo -u postgres createdb transilien -O osm
 #sudo -u postgres psql -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql -d gis
