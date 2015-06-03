@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 RUN apt-get update \
       && apt-get install -y postgresql-client-9.3 postgresql-9.3-postgis-2.1 osm2pgsql
 
+RUN sudo -u postgres pg_ctl -w start
 RUN sudo -u postgres createuser osm
 RUN sudo -u postgres createdb transilien -O osm
 RUN sudo -u postgres psql transilien <<-EOL
