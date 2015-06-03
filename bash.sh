@@ -13,7 +13,7 @@ sudo -u postgres psql -d transilien -c 'GRANT ALL ON DATABASE transilien TO osm;
 #sudo -u postgres psql -d transilien -c "ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;"
 /etc/init.d/postgresql restart
 
-osm2pgsql -G -d transilien ile-de-france-latest.osm.pbf --hstore --create
-osm2pgsql -G -d transilien picardie-latest.osm.pbf --hstore --append
+osm2pgsql -G -U postgres -d transilien ile-de-france-latest.osm.pbf --hstore --create
+osm2pgsql -G -U postgres -d transilien picardie-latest.osm.pbf --hstore --append
 
 
