@@ -8,7 +8,9 @@ sudo -u postgres psql -d transilien -c 'CREATE EXTENSION hstore; CREATE EXTENSIO
 sudo -u postgres psql -d transilien -c 'ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;'
 
 sudo -u postgres psql -d transilien -c 'GRANT ALL ON DATABASE transilien TO osm;'
-
+echo "/etc/postgresql/9.3/main/pg_hba.conf"
+cat /etc/postgresql/9.3/main/pg_hba.conf
+echo "EOF /etc/postgresql/9.3/main/pg_hba.conf"
 #sudo -u postgres psql -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql -d gis
 #sudo -u postgres psql -d transilien -c "ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;"
 /etc/init.d/postgresql restart
