@@ -4,7 +4,7 @@ ENV POSTGRES=9.3
 ENV user=osm
 ENV db=transilien
 
-RUN apt-get --no-install-recommends -y install git unzip curl \
+RUN apt-get -y install git unzip curl \
     build-essential software-properties-common
     
 RUN apt-get update \
