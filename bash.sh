@@ -1,15 +1,26 @@
 #!/bin/bash
+set -e
 
-echo "local   all             postgres                                   trust" >> /etc/postgresql/9.3/main/pg_hba.conf
-/etc/init.d/postgresql restart
+gosu postgres postgres --single -jE <<-EOL
+  CREATE USER osm;
+EOL
 
-sudo -u postgres createuser osm
-sudo -u postgres createdb transilien -O osm
+gosu postgres postgres --single -jE <<-EOL
+  CREATE DATABASE transilien;
+EOL
+
+gosu postgres postgres --single -jE <<-EOL
+  GRANT ALL ON DATABASE transilien TO osm;
+EOL
 #sudo -u postgres psql -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql -d gis
 #sudo -u postgres psql -d transilien -c "ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;"
-sudo -u postgres psql transilien <<-EOL
- CREATE EXTENSION postgis;
- CREATE EXTENSION hstore;
+/etc/init.d/postgresql restart
+
+gosu postgres psql transilien <<-EOL
+  CREATE EXTENSION postgis;
+  CREATE EXTENSION hstore;
+  ALTER TABLE geometry_columns OWNER TO osm;
+  ALTER TABLE spatial_ref_sys OWNER TO osm;
 EOL
 
 osm2pgsql -G -U osm -d transilien ile-de-france-latest.osm.pbf --hstore --create
