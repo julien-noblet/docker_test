@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
 
 ENV POSTGRES=9.3
-ENV user=osm
-ENV db=transilien
+ENV USER=osm
+ENV DB=transilien
 
 
     
