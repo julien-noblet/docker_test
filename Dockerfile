@@ -11,7 +11,7 @@ RUN apt-get update \
       proj-bin libgeos-dev osm2pgsql \
       git unzip curl build-essential software-properties-common
     
-COPY bash.sh /bash.sh
+COPY install.sh /install.sh
 
 RUN wget http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf
 RUN wget http://download.geofabrik.de/europe/france/picardie-latest.osm.pbf
@@ -20,6 +20,11 @@ RUN wget http://download.geofabrik.de/europe/france/haute-normandie-latest.osm.p
 RUN wget http://download.geofabrik.de/europe/france/champagne-ardenne-latest.osm.pbf
 RUN wget http://download.geofabrik.de/europe/france/bourgogne-latest.osm.pbf
 
-RUN chmod +x /bash.sh
-RUN /bash.sh
+RUN chmod +x /install.sh
+RUN /install.sh
 
+CMD [ "--create"]
+ENTRYPOINT ["osm2pgsql","-G", "-U $USER", "-d $DB","--hstore"]
+
+#osm2pgsql -G -U "$USER" -d "$DB" ile-de-france-latest.osm.pbf --hstore --create
+#osm2pgsql -G -U "$USER" -d "$DB" picardie-latest.osm.pbf --hstore --append
