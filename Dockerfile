@@ -9,8 +9,7 @@ ENV db=transilien
 RUN apt-get update \
       && apt-get install -y wget postgresql-client-9.3 postgresql-9.3-postgis-2.1 \
       proj-bin libgeos-dev osm2pgsql \
-      install git unzip curl \
-      build-essential software-properties-common
+      git unzip curl build-essential software-properties-common
     
 COPY bash.sh /bash.sh
 
