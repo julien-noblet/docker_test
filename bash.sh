@@ -1,22 +1,22 @@
 #!/bin/bash
 set -e
 
-gosu postgres postgres --single -jE <<-EOL
+sudo -u postgres postgres --single -jE <<-EOL
   CREATE USER osm;
 EOL
 
-gosu postgres postgres --single -jE <<-EOL
+sudo -u postgres postgres --single -jE <<-EOL
   CREATE DATABASE transilien;
 EOL
 
-gosu postgres postgres --single -jE <<-EOL
+sudo -u postgres postgres --single -jE <<-EOL
   GRANT ALL ON DATABASE transilien TO osm;
 EOL
 #sudo -u postgres psql -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql -d gis
 #sudo -u postgres psql -d transilien -c "ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;"
 /etc/init.d/postgresql restart
 
-gosu postgres psql transilien <<-EOL
+sudo -u postgres psql transilien <<-EOL
   CREATE EXTENSION postgis;
   CREATE EXTENSION hstore;
   ALTER TABLE geometry_columns OWNER TO osm;
