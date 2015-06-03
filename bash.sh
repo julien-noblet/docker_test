@@ -3,7 +3,7 @@ set -e
 /etc/init.d/postgresql restart
 
 sudo -u postgres createuser osm
-sudo -u postgres createdb -E UTF8 -O osm transilien
+sudo -u postgres createdb -O osm transilien
 sudo -u postgres psql -d transilien -c 'CREATE EXTENSION hstore; CREATE EXTENSION postgis;'
 sudo -u postgres psql -d transilien -c 'CREATE EXTENSION postgis; ALTER TABLE geometry_columns OWNER TO username; ALTER TABLE spatial_ref_sys OWNER TO username;'
 
