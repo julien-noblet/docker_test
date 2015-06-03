@@ -4,13 +4,14 @@ ENV POSTGRES=9.3
 ENV user=osm
 ENV db=transilien
 
-RUN apt-get -y install git unzip curl \
-    build-essential software-properties-common
+
     
 RUN apt-get update \
       && apt-get install -y wget postgresql-client-9.3 postgresql-9.3-postgis-2.1 \
-      proj-bin libgeos-dev osm2pgsql
-
+      proj-bin libgeos-dev osm2pgsql \
+      install git unzip curl \
+      build-essential software-properties-common
+    
 COPY bash.sh /bash.sh
 
 RUN wget http://download.geofabrik.de/europe/france/ile-de-france-latest.osm.pbf
