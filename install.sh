@@ -5,9 +5,9 @@ set -e
 sudo -u postgres createuser "$USER"
 sudo -u postgres createdb -O "$USER" "$DB"
 sudo -u postgres psql -d "$DB" -c 'CREATE EXTENSION hstore; CREATE EXTENSION postgis;'
-sudo -u postgres psql -d "$DB" -c 'ALTER TABLE geometry_columns OWNER TO "$USER"; ALTER TABLE spatial_ref_sys OWNER TO "$USER";'
+sudo -u postgres psql -d "$DB" -c "ALTER TABLE geometry_columns OWNER TO $USER; ALTER TABLE spatial_ref_sys OWNER TO $USER;"
 
-sudo -u postgres psql -d "$DB" -c 'GRANT ALL ON DATABASE "$DB" TO "$USER";'
+sudo -u postgres psql -d "$DB" -c "GRANT ALL ON DATABASE $DB TO $USER;"
 echo "/etc/postgresql/9.3/main/pg_hba.conf"
 sed s/peer/trust/ /etc/postgresql/9.3/main/pg_hba.conf > /tmp/pg_hba.conf
 mv /tmp/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
