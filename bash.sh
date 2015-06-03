@@ -9,7 +9,8 @@ sudo -u postgres psql -d transilien -c 'ALTER TABLE geometry_columns OWNER TO os
 
 sudo -u postgres psql -d transilien -c 'GRANT ALL ON DATABASE transilien TO osm;'
 echo "/etc/postgresql/9.3/main/pg_hba.conf"
-sed s/peer/trust/ /etc/postgresql/9.3/main/pg_hba.conf > /etc/postgresql/9.3/main/pg_hba.conf
+sed s/peer/trust/ /etc/postgresql/9.3/main/pg_hba.conf > /tmp/pg_hba.conf
+mv /tmp/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 cat /etc/postgresql/9.3/main/pg_hba.conf
 echo "EOF /etc/postgresql/9.3/main/pg_hba.conf"
 #sudo -u postgres psql -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql -d gis
