@@ -1,6 +1,15 @@
 FROM ubuntu:14.04
+
+ENV POSTGRES=9.3
+ENV user=osm
+ENV db=transilien
+
+RUN apt-get --no-install-recommends -y install git unzip curl \
+    build-essential software-properties-common
+    
 RUN apt-get update \
-      && apt-get install -y wget postgresql-client-9.3 postgresql-9.3-postgis-2.1 osm2pgsql
+      && apt-get install -y wget postgresql-client-9.3 postgresql-9.3-postgis-2.1 \
+      proj-bin libgeos-dev osm2pgsql
 
 COPY bash.sh /bash.sh
 
