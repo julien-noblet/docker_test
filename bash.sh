@@ -3,7 +3,7 @@ set -e
 /etc/init.d/postgresql restart
 
 sudo -u postgres createuser osm
-sudo -u postgres createdb transilien
+sudo -u postgres createdb transilien -O osm
 sudo -u postgres psql -d transilien -c 'CREATE EXTENSION hstore; CREATE EXTENSION postgis;'
 
 sudo -u postgres postgres --single -jE <<-EOL
