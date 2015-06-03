@@ -11,6 +11,6 @@ sudo -u postgres psql transilien <<-EOL
 EOL
 
 osm2pgsql -G -U osm -d transilien ile-de-france-latest.osm.pbf --hstore --create
-osm2pgsql -G -U osm -d transilien path/to/picardie-latest.osm.pbf --hstore --append
+osm2pgsql -G -U osm -d transilien picardie-latest.osm.pbf --hstore --append
 
 
